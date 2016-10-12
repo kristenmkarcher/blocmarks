@@ -14,8 +14,12 @@
           <% topic.bookmarks.each do |bookmark| %>
             <tr>
               <td><%= link_to bookmark.url, "#{bookmark.url}", :target => '_blank' %></td>
-              <td><%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %></td>
-              <td><%= link_to "Delete", topic_bookmark_path(topic, bookmark), :method => :delete, :data => { :confirm => 'Are you sure you want to delete this bookmark?' } %></td>
+              <% if policy(bookmark).update?%>
+                <td><%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %></td>
+              <% end %>
+              <% if policy(bookmark).destroy?%>
+                <td><%= link_to "Delete", topic_bookmark_path(topic, bookmark), :method => :delete, :data => { :confirm => 'Are you sure you want to delete this bookmark?' } %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

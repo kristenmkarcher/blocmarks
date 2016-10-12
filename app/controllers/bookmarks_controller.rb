@@ -1,23 +1,27 @@
 class BookmarksController < ApplicationController
-  
+
+  before_action :authenticate_user!, except: :show
+
   def show
-    @bookmark = Bookmark.all
+    @bookmark = Bookmark.find(params[:id])
   end
- 
+
   def new
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.new
   end
- 
+
   def edit
     @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.find(params[:id])
   end
- 
+
   def create
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build(params.require(:bookmark).permit(:url))
-    
+    @bookmark.user = current_user
+    authorize @bookmark
+
     if @bookmark.save
       flash[:notice] = "Bookmark was saved successfully."
       redirect_to topics_path
@@ -26,11 +30,12 @@ class BookmarksController < ApplicationController
       render :new
     end
   end
- 
+
   def update
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.find(params[:id])
-    
+    authorize @bookmark
+
     if @bookmark.update_attributes(params.require(:bookmark).permit(:url))
       redirect_to topics_path, notice: "Bookmark was updated successfully."
     else
@@ -38,10 +43,11 @@ class BookmarksController < ApplicationController
       render :edit
     end
   end
- 
+
   def destroy
     @bookmark = Bookmark.find(params[:id])
-    
+    authorize @bookmark
+
     if @bookmark.destroy
       flash[:notice] = "\"#{@bookmark.url}\" was deleted successfully."
       redirect_to topics_path
@@ -50,5 +56,4 @@ class BookmarksController < ApplicationController
       render :show
     end
   end
-   
 end
