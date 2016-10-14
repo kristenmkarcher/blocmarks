@@ -2,6 +2,7 @@
 
 <% @topic.bookmarks.each do |bookmark| %>
   <p><%= link_to bookmark.url, [@topic, bookmark] %></p>
+   <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
 <% end %>
 
 <div class="">

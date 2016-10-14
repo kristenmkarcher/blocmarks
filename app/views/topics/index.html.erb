@@ -20,6 +20,7 @@
               <% if policy(bookmark).destroy?%>
                 <td><%= link_to "Delete", topic_bookmark_path(topic, bookmark), :method => :delete, :data => { :confirm => 'Are you sure you want to delete this bookmark?' } %></td>
               <% end %>
+              <td> <%= render partial: 'likes/like', locals: { bookmark: bookmark } %></td>
             </tr>
           <% end %>
         </tbody>
