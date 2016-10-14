@@ -13,7 +13,7 @@
         <tbody>
           <% topic.bookmarks.each do |bookmark| %>
             <tr>
-              <td><%= link_to bookmark.url, "#{bookmark.url}", :target => '_blank' %></td>
+              <td><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></td>
               <% if policy(bookmark).update?%>
                 <td><%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %></td>
               <% end %>

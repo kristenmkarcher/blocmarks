@@ -1,7 +1,7 @@
 <h1><%= @topic.title %></h1>
 
 <% @topic.bookmarks.each do |bookmark| %>
-  <p><%= link_to bookmark.url, [@topic, bookmark] %></p>
+  <p><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></p>
    <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
 <% end %>
 

@@ -1,0 +1,24 @@
+<h1>User Profile</h1>
+<br /><br />
+<div class="row">
+  <h4>My Blocmarks</h4>
+  <div class="media-body">
+    <% @user_bookmarks.each do |bookmark| %>
+      <div class="col-sm-4">
+        <h5><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></h5>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br /><br />
+<div class="row">
+  <h4>Liked Blocmarks</h4>
+  <div class="media-body">
+    <% @likes_bookmarks.each do |bookmark| %>
+      <div class="col-sm-4">
+        <h5><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></h5>
+        <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+      </div>
+    <% end %>
+  </div>
+</div>
