@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get 'users/show'
   get 'likes/index'
   post :incoming, to:'incoming#create'
 
