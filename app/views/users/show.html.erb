@@ -5,7 +5,7 @@
   <div class="media-body">
     <% @user_bookmarks.each do |bookmark| %>
       <div class="col-sm-4">
-        <h5><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></h5>
+        <h5><%= link_to bookmark.url, [@topic, bookmark] %></h5>
       </div>
     <% end %>
   </div>
@@ -16,7 +16,7 @@
   <div class="media-body">
     <% @likes_bookmarks.each do |bookmark| %>
       <div class="col-sm-4">
-        <h5><%= link_to bookmark.url, "http://#{bookmark.url}", target: "_blank" %></h5>
+        <h5><%= link_to bookmark.url, [@topic, bookmark] %></h5>
         <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
       </div>
     <% end %>
